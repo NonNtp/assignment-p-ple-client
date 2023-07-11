@@ -31,6 +31,8 @@ const Profile = () => {
           console.error(error);
         });
     }
+    history.push('/')
+    history.go(0)
   };
 
 
