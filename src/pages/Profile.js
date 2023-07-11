@@ -11,6 +11,28 @@ const Profile = () => {
 
   const [employee, setEmployee] = useState('')
 
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  }
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+
+      axios.post(`http://localhost:8082/api/v1/employee/image/upload/${employeeCode}`, formData)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  };
+
 
   const fetchData = async (employeeCode) => {
     const response = await axios.get(
@@ -38,7 +60,10 @@ const Profile = () => {
       <p>salary : {employee.salary}</p>
       <p>status : {employee.status}</p>
       {employee.imageName ? <img src={`http://localhost:8082/api/v1/employee/image/download/${employee.imageName}`} alt={employee.firstName} /> : <img src={`https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png`} alt="default" />}
-
+      <form onSubmit={handleFormSubmit}>
+      <input type="file" onChange={handleFileChange} />
+      <button type="submit">Upload</button>
+    </form>
     </div>
   )
 }
