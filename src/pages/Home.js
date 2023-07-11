@@ -22,7 +22,7 @@ const Home = () => {
                 return (
                     <div key={index}>
                         <div className="card">
-                        {data.imageName ? <img src={`http://localhost:8082/api/v1/employee/image/download/${data.imageName}`} alt={data.firstName} /> : <img src={`https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png`} alt="default" />}
+                        {data.imageName ? <img src={`http://localhost:8082/api/v1/employee/image/download/${data.imageName}`} alt={data.firstName} /> : <img src={`https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png`} alt="default" />}
                             <div className="card-info">
                                 <h3 className="card-title">Id : {data.employeeCode}</h3>
                                 <p className="card-description">Name : {data.employeeName}</p>

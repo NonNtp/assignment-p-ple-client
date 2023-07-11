@@ -1,8 +1,37 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
+import axios from 'axios';
 
 const EmployeeForm = () => {
     const history = useHistory()
+
+    const [company, setCompany] = useState([])
+    const [department, setDeaprtment] = useState([])
+    const [position , setPosition] = useState([])
+
+
+    const fetchData = async () => {
+        const response = await axios.get(
+            'http://localhost:8082/api/v1/company'
+        )
+        setCompany(response.data)
+
+        const response2 = await axios.get(
+            'http://localhost:8082/api/v1/department'
+        )
+        const response3 = await axios.get(
+            'http://localhost:8082/api/v1/position'
+        )
+
+        setCompany(response.data)
+        setDeaprtment(response2.data)
+        setPosition(response3.data)
+    }
+
+    useEffect(() => {
+        fetchData()
+        // eslint-disable-next-line
+    }, [])
 
     const firstNameInputRef = useRef()
     const lastnameInputRef = useRef()
@@ -108,30 +137,45 @@ const EmployeeForm = () => {
             </div>
             <div>
                 <label htmlFor='company'>Company:</label>
-                <input
-                    type="text"
-                    id='company'
-                    ref={companyInputRef}
-                    required
-                />
+                <select ref={companyInputRef}>
+                    {company.map((company, index) => {
+                        return (
+                            <option
+                                key={index}
+                                value={company.companyName}
+                                label={company.companyName}
+                            ></option>
+                        )
+                    })}
+                </select>
             </div>
             <div>
                 <label htmlFor='department'>department:</label>
-                <input
-                    type="text"
-                    id='department'
-                    ref={departmentInputRef}
-                    required
-                />
+                <select ref={departmentInputRef}>
+                    {department.map((department, index) => {
+                        return (
+                            <option
+                                key={index}
+                                value={department.departmentName}
+                                label={department.departmentName}
+                            ></option>
+                        )
+                    })}
+                </select>
             </div>
             <div>
                 <label htmlFor='position'>position:</label>
-                <input
-                    type="text"
-                    id='position'
-                    ref={positionInputRef}
-                    required
-                />
+               <select ref={positionInputRef}>
+                    {position.map((position, index) => {
+                        return (
+                            <option
+                                key={index}
+                                value={position.positionName}
+                                label={position.positionName}
+                            ></option>
+                        )
+                    })}
+                </select>
             </div>
             <div>
                 <label htmlFor='salary'>salary:</label>
