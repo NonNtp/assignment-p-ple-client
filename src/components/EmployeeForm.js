@@ -14,7 +14,6 @@ const EmployeeForm = () => {
         const response = await axios.get(
             'http://localhost:8082/api/v1/company'
         )
-        setCompany(response.data)
 
         const response2 = await axios.get(
             'http://localhost:8082/api/v1/department'

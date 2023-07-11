@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import "./Home.css"
+import { useHistory } from 'react-router-dom'
 
 const Home = () => {
+    const history = useHistory()
     const [value, setValue] = useState([])
 
     const fetchData = async () => {
@@ -27,7 +29,7 @@ const Home = () => {
                                 <h3 className="card-title">Id : {data.employeeCode}</h3>
                                 <p className="card-description">Name : {data.employeeName}</p>
                                 <p className="card-email">Position : {data.position}</p>
-                                <button className="card-button">View Profile</button>
+                                <button className="card-button" onClick={() => history.push(`/profile/${data.employeeCode}`)}>View Profile</button>
                             </div>
                         </div>
                     </div>

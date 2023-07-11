@@ -30,8 +30,8 @@ const Navbar = () => {
                     })}
                 </div>
                 <ul className="nav-links">
-                    <li><NavLink to="/">Home</NavLink></li>
-                    <li><NavLink to="/employee">Employee</NavLink></li>
+                    <li><NavLink to="/" exact activeClassName='active'>Home</NavLink></li>
+                    <li><NavLink to="/employee" activeClassName='active'>Employee</NavLink></li>
                 </ul>
             </nav>
         </div>
