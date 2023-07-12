@@ -1,25 +1,25 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 import "./Department.css"
 
 const Department = () => {
   const [department, setDeaprtment] = useState([])
-  const [departmentId, setDeaprtmentId] = useState([])
   const [position, setPosition] = useState([])
+  const [departmentId, setDepartmentId] = useState(0);
 
-  const departmentInputRef = useRef()
 
 
   const fetchData = async () => {
     const response = await axios.get(
       'http://localhost:8082/api/v1/department')
     setDeaprtment(response.data)
+
   }
 
   const fetchData2 = async () => {
     const response = await axios.get(
-      `http://localhost:8082/api/v1/position/2`)
+      `http://localhost:8082/api/v1/position/${departmentId}`)
     setPosition(response.data)
   }
 
@@ -27,24 +27,24 @@ const Department = () => {
     fetchData()
     fetchData2()
     // eslint-disable-next-line
-  }, [])
-
-
+  }, [departmentId])
 
   return (
     <div>
       <label htmlFor='company'>Department : &nbsp;</label>
-      <select>
+      <select onChange={(event) => setDepartmentId(event.target.value)} >
+      <option value={0} label='Please select department name'></option>
         {department.map((department, index) => {
           return (
             <option
               key={index}
-              value={department.departmentName}
+              value={department.departmentId}
               label={department.departmentName}
             ></option>
           )
         })}
       </select>
+      
       <table className="table">
         <thead>
           <tr>

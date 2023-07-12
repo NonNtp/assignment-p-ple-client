@@ -8,6 +8,7 @@ const EmployeeForm = () => {
     const [company, setCompany] = useState([])
     const [department, setDeaprtment] = useState([])
     const [position , setPosition] = useState([])
+    
 
 
     const fetchData = async () => {
@@ -19,7 +20,7 @@ const EmployeeForm = () => {
             'http://localhost:8082/api/v1/department'
         )
         const response3 = await axios.get(
-            'http://localhost:8082/api/v1/position'
+            `http://localhost:8082/api/v1/position`
         )
 
         setCompany(response.data)
@@ -139,7 +140,7 @@ const EmployeeForm = () => {
             </div>
             <div>
                 <label htmlFor='department'>department:</label>
-                <select ref={departmentInputRef}>
+                <select ref={departmentInputRef} >
                     {department.map((department, index) => {
                         return (
                             <option

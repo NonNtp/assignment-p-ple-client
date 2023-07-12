@@ -80,9 +80,7 @@ const Home = () => {
                 <input type="text" ref={searchInputRef} />
                 <button onClick={fetchData2}>Search</button>
                 <button onClick={handleReset}>Reset</button>
-
             </form>}
-
         </div>
     )
 }
